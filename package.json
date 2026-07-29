@@ -1,0 +1,26 @@
+{
+  "name": "nook",
+  "version": "1.0.0",
+    "workspaces": [
+    "apps/*",
+    "backend/*",
+    "packages/*",
+    "infrastructure"
+  ],
+  "description": "Official repository for Nook, an online collaborative space for couples, friends and groups.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasthomasis/Nook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomasthomasis/Nook/issues"
+  },
+  "homepage": "https://github.com/thomasthomasis/Nook#readme"
+}
