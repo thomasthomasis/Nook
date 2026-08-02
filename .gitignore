@@ -1,5 +1,97 @@
+# ==========================================
+# 1. System & Common Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+Thumds.db
+desktop.ini
+*.log
+*.sublime-project
+*.sublime-workspace
+.vscode/
+!.vscode/extensions.json
+.idea/
+
+# ==========================================
+# 2. JavaScript / Node / React Native (Shared)
+# ==========================================
 node_modules/
-dist/
-cdk.out/
-*.tsbuildinfo
+.npm
+.eslintcache
+.yarn-clean
+yarn-error.log
+.pnpm-debug.log
+
+# Env / Secret files
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Expo (if using Expo for React Native)
+.expo/
+dist/
+web-build/
+
+# ==========================================
+# 3. React Native - iOS Specific
+# ==========================================
+ios/Pods/
+ios/build/
+ios/.xcode.env.local
+*.xcworkspace/
+# Note: Keep the actual xcworkspace if you aren't using CocoaPods, 
+# but if you use Pods (standard), ignore the generated workspace:
+# !ios/*.xcworkspace 
+
+# Security / Certificates
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ==========================================
+# 4. React Native - Android Specific
+# ==========================================
+android/app/build/
+android/.gradle/
+android/build/
+*.iml
+*.apk
+*.aar
+*.bundle
+
+# Local keystores (Crucial: never commit production signing keys)
+*.keystore
+*.jks
+!debug.keystore
+
+# Android Studio local configurations
+local.properties
+
+# ==========================================
+# 5. AWS Backend (CDK / Serverless)
+# ==========================================
+
+# AWS CDK
+.cdk.staging/
+cdk.out/
+
+# General AWS / CloudFormation artifacts
+.aws/
+.serverless/
+bucket-policy.json

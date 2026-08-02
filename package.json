@@ -1,16 +1,23 @@
 {
   "name": "nook",
   "version": "1.0.0",
-    "workspaces": [
+  "workspaces": [
     "apps/*",
     "backend/*",
     "packages/*",
     "infrastructure"
   ],
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "description": "Official repository for Nook, an online collaborative space for couples, friends and groups.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build --workspaces --if-present"
   },
   "repository": {
     "type": "git",
