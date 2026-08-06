@@ -11,7 +11,7 @@ export interface ApiStackProps extends StackProps {
 
 export class ApiStack extends Stack {
     public readonly httpApi: apigwv2.HttpApi;
-    public readonly authorizer: authorizers.HttpJwtAuthorizer;
+    public readonly authorizerId: string;
 
     constructor(scope: Construct, id: string, props: ApiStackProps) {
         super(scope, id, props);
@@ -25,11 +25,18 @@ export class ApiStack extends Stack {
             },
         });
 
-        this.authorizer = new authorizers.HttpJwtAuthorizer(
-            "CognitoAuthorizer",
-            `https://cognito-idp.${this.region}.amazonaws.com/${props.userPool.userPoolId}`,
-            { jwtAudience: [props.userPoolClient.userPoolClientId] }
-        );
+        const authorizer = new apigwv2.CfnAuthorizer(this, "CognitoAuthorizer", {
+            apiId: this.httpApi.httpApiId,
+            authorizerType: "JWT",
+            identitySource: ["$request.header.Authorization"],
+            name: "CognitoAuthorizer",
+            jwtConfiguration: {
+                audience: [props.userPoolClient.userPoolClientId],
+                issuer: `https://cognito-idp.${this.region}.amazonaws.com/${props.userPool.userPoolId}`,
+            },
+        });
+
+        this.authorizerId = authorizer.ref;
 
         // No routes yet - the Identity domain will call httpApi.addRoutes(...)
         // once it has a real Lambda to attach.

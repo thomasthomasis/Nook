@@ -30,7 +30,7 @@ export class AuthStack extends Stack {
 
     this.userPoolClient = this.userPool.addClient("MobileAppClient", {
       userPoolClientName: "nook-dev-mobile",
-      authFlows: { userSrp: true },
+      authFlows: { userSrp: true, adminUserPassword: true },
       accessTokenValidity: Duration.hours(1),
       idTokenValidity: Duration.hours(1),
       refreshTokenValidity: Duration.days(30),

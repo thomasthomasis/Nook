@@ -6,6 +6,7 @@ import * as rds from "aws-cdk-lib/aws-rds";
 export class DatabaseStack extends Stack {
     public readonly vpc: ec2.Vpc;
     public readonly cluster: rds.DatabaseCluster;
+    public readonly databaseSecurityGroup: ec2.SecurityGroup;
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
@@ -20,7 +21,7 @@ export class DatabaseStack extends Stack {
             ],
         });
 
-        const dbSecurityGroup = new ec2.SecurityGroup(this, "DatabaseSecurityGroup", {
+        this.databaseSecurityGroup = new ec2.SecurityGroup(this, "DatabaseSecurityGroup", {
             vpc: this.vpc,
             description: "Allows Lambdas in the private subnets to reach Aurora",
             allowAllOutbound: false,
@@ -32,7 +33,7 @@ export class DatabaseStack extends Stack {
             }),
             vpc: this.vpc,
             vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-            securityGroups: [dbSecurityGroup],
+            securityGroups: [this.databaseSecurityGroup],
             serverlessV2MinCapacity: 0.5,
             serverlessV2MaxCapacity: 1,
             writer: rds.ClusterInstance.serverlessV2("Writer"),
